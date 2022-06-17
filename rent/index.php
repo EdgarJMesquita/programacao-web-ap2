@@ -52,6 +52,7 @@
     }
   } else {
     http_response_code(404);
+    die(json_encode(array("message"=>"Carro não encontrado.")));
   }
   if($carStatus!=="available"){
     http_response_code(422);
