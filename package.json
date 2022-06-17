@@ -1,0 +1,11 @@
+{
+  "name": "programacaowebap2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "php -S localhost:8000",
+    "ngrok": "ngrok http 3030",
+    "start": "php -S localhost:8000 && ngrok http 3030"
+  }
+}
