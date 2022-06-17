@@ -23,6 +23,7 @@
   while($reg=mysqli_fetch_assoc($result)){
     $data[] = $reg;
   }
+  
   // Encerrar conexão
   $connection->close();
 

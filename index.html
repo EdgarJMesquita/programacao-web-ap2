@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      defer
+      src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>Locadora</title>
+  </head>
+  <body>
+    <table x-data>
+      <thead>
+        <tr>
+          <th>Cod.</th>
+          <th>MODELO</th>
+          <th>ANO</th>
+          <th>COR</th>
+          <th>PLACA</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <template x-for="car in $store.cars.data">
+          <tr>
+            <td><p x-text="car.id"></p></td>
+            <td><p x-text="car.model"></p></td>
+            <td><p x-text="car.year"></p></td>
+            <td><p x-text="car.color"></p></td>
+            <td><p x-text="car.plate"></p></td>
+            <td>
+              <button x-on:click="$store.cars.rent(car.id)">Alugar</button>
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </table>
+    <script src="script.js"></script>
+  </body>
+</html>
