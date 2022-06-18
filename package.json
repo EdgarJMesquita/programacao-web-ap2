@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "php -S localhost:8000",
-    "ngrok": "ngrok http 3030",
-    "start": "php -S localhost:8000 && ngrok http 3030"
+    "ngrok": "ngrok http 8000",
+    "start": "php -S localhost:8000 && ngrok http 8000"
   }
 }

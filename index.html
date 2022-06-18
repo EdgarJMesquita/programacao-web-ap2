@@ -9,36 +9,73 @@
       defer
       src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"
     ></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script> -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+
     <title>Locadora</title>
   </head>
   <body>
-    <table x-data>
-      <thead>
-        <tr>
-          <th>Cod.</th>
-          <th>MODELO</th>
-          <th>ANO</th>
-          <th>COR</th>
-          <th>PLACA</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <template x-for="car in $store.cars.data">
+    <div class="container">
+      <table x-data class="table">
+        <thead>
           <tr>
-            <td><p x-text="car.id"></p></td>
-            <td><p x-text="car.model"></p></td>
-            <td><p x-text="car.year"></p></td>
-            <td><p x-text="car.color"></p></td>
-            <td><p x-text="car.plate"></p></td>
-            <td>
-              <button x-on:click="$store.cars.rent(car.id)">Alugar</button>
-            </td>
+            <th scope="col">#</th>
+            <th scope="col">MODELO</th>
+            <th scope="col">ANO</th>
+            <th scope="col">COR</th>
+            <th scope="col">PLACA</th>
+            <th scope="col">STATUS</th>
+            <th scope="col"></th>
           </tr>
-        </template>
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          <template x-for="car in $store.cars.data">
+            <tr>
+              <td x-text="car.id"></td>
+              <td x-text="car.model"></td>
+              <td x-text="car.year"></td>
+              <td x-text="car.color"></td>
+              <td x-text="car.plate"></td>
+              <td>
+                <template x-if="car.status==='available'">
+                  <span class="badge text-bg-success">Disponível</span>
+                </template>
+                <template x-if="car.status==='rented'">
+                  <span class="badge text-bg-warning">Alugado</span>
+                </template>
+              </td>
+              <td>
+                <template x-if="!$store.cars.isLoading">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    x-on:click="$store.cars.handle(car.id, car.status)"
+                    x-text="car.status==='available'?'Alugar':'Devolver'"
+                  ></button>
+                </template>
+                <template x-if="$store.cars.isLoading">
+                  <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Carregando...</span>
+                  </div>
+                </template>
+              </td>
+            </tr>
+          </template>
+        </tbody>
+      </table>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
